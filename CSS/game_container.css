@@ -1,0 +1,52 @@
+#motus_game_container,
+.trial,
+.letter_container {
+  display: flex;
+}
+
+#motus_game_container {
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.letter_container,
+.trial,
+.letter_input_container {
+  margin: 1px;
+}
+
+.letter_container,
+.letter_input_container {
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+
+  width: 80px;
+  height: 80px;
+  color: white;
+  background: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+.letter_input_container {
+  outline: none;
+  border: 0px solid;
+  width: 80px;
+  height: 80px;
+  padding: 0px;
+}
+
+input {
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "Nunito";
+}
+
+#row_2 {
+  border: 5px solid yellow !important;
+}
