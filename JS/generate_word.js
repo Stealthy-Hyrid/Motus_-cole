@@ -50,7 +50,7 @@ export function retrieveWord() {
         let length = parseInt(current_word.length);
      
         for (let i = 0; i < length; i++) {
-
+            
             row_1_letter[i].innerHTML = current_word.charAt(i).toUpperCase();
            
             

@@ -1,6 +1,7 @@
 <?php
 session_start();
 $length = $_COOKIE["length"];
+$found = 1;
 ?>
 
 
@@ -27,21 +28,59 @@ $length = $_COOKIE["length"];
         <!-- Première ligne -->
         <div id="row_1" class="trial">
 
+
+            <!-- Show found letter-->
             <?php
-            for ($i = 0; $i < $length; $i++) { ?>
+            for ($i = 0; $i < $found; $i++) { ?>
                 <div class="letter_container row_1_letter"></div>
             <?php } ?>
 
+            <!-- Don't show found letter-->
+            <?php
+
+            for ($i = 0; $i < $length - $found; $i++) { ?>
+                <div class=" letter_container"><input class="letter_input_container" type="text" id="letter_input<?= $i ?>"
+                        maxlength="1"
+                        onkeydown=" return /[a-zâîûôêéè]/i.test(event.key) && backTab('letter_input<?= $i - 1 ?>','letter_input<?= $i ?>', 'letter_input<?= $i + 1 ?>', '1')"
+                        onkeyup=" autoTab('letter_input<?= $i - 1 ?>','letter_input<?= $i ?>', 'letter_input<?= $i + 1 ?>', '1')">
+                </div>
+            <?php } ?>
+
         </div>
+        <script>
+
+            /// Auto Tab entre chaque input et retour en arrière après suppression
+            function autoTab(input0, input1, input2, length) {
+
+                const key = event.keyCode || event.charCode;
+
+                if (document.getElementById(input2)) {
+                    if (document.getElementById(input1).value.length == length) {
+                        document.getElementById(input2).focus();
+                    }
+                }
+            }
+            function backTab(input0, input1, input2, length) {
+
+                const key = event.keyCode || event.charCode;
+
+                if (key == 8 && document.getElementById(input0)) {
+                    if (document.getElementById(input1).value.length == 0) {
+                        document.getElementById(input0).focus();
+                    }
+                }
+            }
+
+        </script>
+
+
 
         <!-- Deuxième ligne -->
         <div id="row_2" class="trial">
 
             <?php
-
             for ($i = 0; $i < $length; $i++) { ?>
-                <div class=" row_2_letter"><input class="letter_input_container" type="text" id="letter_input<?= $i ?>"
-                        maxlength="1" onkeyup="autoTab('letter_input<?= $i ?>', '1', 'letter_input<?= $i + 1 ?>')"></div>
+                <div class="letter_container row_2_letter"></div>
             <?php } ?>
 
         </div>
@@ -93,25 +132,14 @@ $length = $_COOKIE["length"];
         <div style="margin-top:20px">
             <button type="button" id="game_start_btn">Commencer</button>
             <button type="button" id="game_reset_btn">Réinitialiser</button>
-            <button type="button" id="trial">test</button>
+            <button type="button" id="trial">Suivant</button>
+            <button type="button" id="compare">Comparer</button>
         </div>
     </div>
 
     <script src="./JS/main.js" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script>
-
-        /// Auto Tab entre chaque input pour éviter de devoir cliquer à chaque fois
-        function autoTab(input1, length, input2) {
-            if (document.getElementById(input2)) {
-                if (document.getElementById(input1).value.length == length) {
-                    document.getElementById(input2).focus();
-                }
-            }
-        }
-
-    </script>
 </body>
 
 </html>
