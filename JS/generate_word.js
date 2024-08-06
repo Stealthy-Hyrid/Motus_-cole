@@ -1,7 +1,6 @@
 import words from './words.json' with {type:'json'};
 import { setCookie, eraseCookie } from "./cookie.js";
 import { triggerLevel } from './level.js';
-import { api_word } from './api.js';
 import { getSessionItem, setSessionItem } from './global_function.js';
 
 const row_1_letter = document.getElementsByClassName("row_1_letter")
