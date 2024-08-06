@@ -5,7 +5,7 @@ import {getClass,getId,getSessionItem,setSessionItem,setCookie, eraseCookie, get
 /// Récupérer le mot au chargement
 window.addEventListener("load", (event) => {
   if (!getCookie("length")) {
-    setCookie("length", "", 7);
+    setCookie("length", "6", 7);
   }
 
   if (!getSessionItem("current_word")) {

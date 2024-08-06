@@ -2,20 +2,25 @@ import { getClass, getId, background, getSessionItem,setSessionItem, getCookie }
 
 // Essaie en cours
 let trial = 0;
-
+let word_check;
+let input_check;
+let input_list;
 
 // On récupere chaque inputs et les place dans un tableau
- let input_list = [];
+
+if (getSessionItem("current_word") && getCookie("length")) {
+  
+  input_list = [];
   
   for (let i = 0; i <= getSessionItem("current_word").length - 2; i++) {
     input_list.push(getId("letter_input" + i));
   }
   
   // On insère le mot dans un tableau
- let word_check = getSessionItem("current_word").split("");
+  word_check = getSessionItem("current_word").split("");
   
 // On créer un tableau pour y insérer les valeurs d'input
-let input_check = [];
+input_check = [];
 
 // On y insère la première lettre du mot
 input_check.unshift(word_check[0]);
@@ -27,7 +32,7 @@ for (let i = 0; i < input_list.length; i++) {
   });
 }
 
-
+}
 /// On réordonne les divs entre chaque essaies
 function nextTrial() {
   switch (trial) {
@@ -75,11 +80,10 @@ function insertPrevAnswer() {
   }
 
   for (let i = 0; i < prev_answer.length; i++) {
-    if(input_check[i] != undefined){
     prev_answer[i].innerHTML = input_check[i].toUpperCase();
   }
 }
-}
+
 // On compare les réponses données aux réponses attendues et on modifie l'affichage
 function colorChange(target) {
   for (let i = 1; i < word_check.length; i++) {
