@@ -39,7 +39,7 @@ $found = 1;
             <?php
 
             for ($i = 0; $i < $length - $found; $i++) { ?>
-                <div class=" letter_container"><input class="letter_input_container" type="text" id="letter_input<?= $i ?>"
+                <div class=" letter_container"><input class="letter_input_container" placeholder="." type="text" id="letter_input<?= $i ?>"
                         maxlength="1"
                         onkeydown=" return /[a-zâîûôêéè]/i.test(event.key) && backTab('letter_input<?= $i - 1 ?>','letter_input<?= $i ?>', 'letter_input<?= $i + 1 ?>', '1')"
                         onkeyup=" autoTab('letter_input<?= $i - 1 ?>','letter_input<?= $i ?>', 'letter_input<?= $i + 1 ?>', '1')">
@@ -129,10 +129,25 @@ $found = 1;
 
         </div>
 
+         <!-- Septième ligne -->
+         <div id="row_7" class="trial">
+
+<?php
+
+for ($i = 0; $i < $length; $i++) { ?>
+    <div class="letter_container row_7_letter"></div>
+<?php } ?>
+
+</div>
+
+    <div>
+        <p id = "result"></p>
+    </div>
+
         <div style="margin-top:20px">
-            <button type="button" id="game_start_btn">Commencer</button>
+            
+        <button type="button" id="game_start_btn">Commencer</button>
             <button type="button" id="game_reset_btn">Réinitialiser</button>
-            <button type="button" id="trial">Suivant</button>
             <button type="button" id="compare">Comparer</button>
         </div>
     </div>
