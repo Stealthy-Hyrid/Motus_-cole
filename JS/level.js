@@ -11,7 +11,7 @@ if (getSessionItem("level") === null) {
 }
 
 // Incrémentation et sauvegarde du level dans la session pour y accéder au rafraichissement
-export function triggerLevel() {
+export function setLevel() {
   
   if (current_level >= 0) {
     let next_level = current_level + 1;
@@ -31,7 +31,7 @@ export function resetLevel() {
 export function startLevel() {
 
   // On commence le niveau
-  triggerLevel();
+  setLevel();
   
   // On récupère un mot
   generateWord();

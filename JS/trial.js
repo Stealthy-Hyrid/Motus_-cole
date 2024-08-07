@@ -69,13 +69,8 @@ function nextTrial() {
     default:
   }
 
-// On remet le focus sur le prochain input vide
-for (let input of input_list) {
-  if (input.value == "") {
-    input.focus();
-    break;
-  }
-}
+// On remet le focus sur le prochain input
+input_list[0].focus();
 
  
 }
