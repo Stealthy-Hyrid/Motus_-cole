@@ -1,24 +1,17 @@
-import { generateWord, getWord, retrieveWord } from "./generate_word.js";
-import { resetLevel } from "./level.js";
+import { generateWord, retrieveWord } from "./generate_word.js";
+import { resetLevel, startLevel } from "./level.js";
 import { checkAnswer } from "./trial.js";
-import {getClass,getId,getSessionItem,setSessionItem,setCookie, eraseCookie, getCookie} from "./global_function.js";
+import {getClass,getId,getSessionItem,setSessionItem,setCookie, eraseCookie} from "./global_function.js";
+
 /// Récupérer le mot au chargement
 window.addEventListener("load", (event) => {
-  if (!getCookie("length")) {
-    setCookie("length", "6", 7);
-  }
-
-  if (!getSessionItem("current_word")) {
-    setSessionItem("current_word", "");
-  }
-
   retrieveWord();
   getId("letter_input0").focus();
 });
 
-// Commencer le jeu
+/// Commencer le jeu
 getId("game_start_btn").addEventListener("click", () => {
-  getWord();
+  startLevel();
 });
 
 /// Réinitialiser à 0

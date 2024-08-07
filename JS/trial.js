@@ -1,4 +1,4 @@
-import { getClass, getId, background, getSessionItem,setSessionItem, getCookie } from "./global_function.js";
+import { getClass, getId, background, getSessionItem, setSessionItem } from "./global_function.js";
 
 // Essaie en cours
 let trial = 0;
@@ -6,10 +6,10 @@ let word_check;
 let input_check;
 let input_list;
 
-// On récupere chaque inputs et les place dans un tableau
 
-if (getSessionItem("current_word") && getCookie("length")) {
+if (getSessionItem("current_word")) {
   
+  // On récupere chaque inputs et les place dans un tableau
   input_list = [];
   
   for (let i = 0; i <= getSessionItem("current_word").length - 2; i++) {
@@ -33,6 +33,7 @@ for (let i = 0; i < input_list.length; i++) {
 }
 
 }
+
 /// On réordonne les divs entre chaque essaies
 function nextTrial() {
   switch (trial) {
@@ -68,10 +69,18 @@ function nextTrial() {
     default:
   }
 
-  getId("letter_input0").focus();
+// On remet le focus sur le prochain input vide
+for (let input of input_list) {
+  if (input.value == "") {
+    input.focus();
+    break;
+  }
 }
 
-// On affiche les réponses précédentes
+ 
+}
+
+/// On affiche les essaies précédents
 function insertPrevAnswer() {
   let prev_answer = [];
 
@@ -84,9 +93,10 @@ function insertPrevAnswer() {
   }
 }
 
-// On compare les réponses données aux réponses attendues et on modifie l'affichage
-function colorChange(target) {
+/// On compare les réponses données aux réponses attendues et on modifie l'affichage
+function backgroundColorChange(target) {
   for (let i = 1; i < word_check.length; i++) {
+    
     // On identifie les cibles de changements
     let box;
     let input = getClass(`letter_input_container`)[i - 1];
@@ -121,16 +131,14 @@ function colorChange(target) {
   }
 }
 
-// On compare les réponses et on modifie l'affichage, affiche les réponses précedentes et passes à l'essaie suivant
+/// Comparaison des réponses données, modification de l'affichage et affichage des essaies précédents, puis passage à l'essaie suivant
 export function checkAnswer() {
   if (trial < 6) {
-    colorChange(`row_${trial + 2}_letter`);
+    backgroundColorChange(`row_${trial + 2}_letter`);
     nextTrial();
     insertPrevAnswer();
   } else {
-    colorChange(`letter_input_container`);
-    getId("result").innerHTML = `La réponse était " ${sessionStorage.getItem(
-      "current_word"
-    )}"`;
+    backgroundColorChange(`letter_input_container`);
+    getId("result").innerHTML = `La réponse était " ${sessionStorage.getItem("current_word")}"`;
   }
 }

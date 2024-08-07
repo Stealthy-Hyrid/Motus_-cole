@@ -10,8 +10,6 @@ if (getSessionItem("level") === null) {
   setSessionItem("level", level);
 }
 
-console.log(getSessionItem("level"));
-
 // Incrémentation et sauvegarde du level dans la session pour y accéder au rafraichissement
 export function triggerLevel() {
   
@@ -21,7 +19,6 @@ export function triggerLevel() {
   }  
 }
 
-
 // Reset complet du jeu
 export function resetLevel() {
     level = 0
@@ -29,3 +26,18 @@ export function resetLevel() {
     generateWord();
     window.location.reload(true);
 }
+
+// Commencer le niveau
+export function startLevel() {
+
+  // On commence le niveau
+  triggerLevel();
+  
+  // On récupère un mot
+  generateWord();
+  
+  // On rafraichit la page pour actualiser le php
+      window.location.reload(true);
+      
+      }
+  
